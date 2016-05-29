@@ -14,6 +14,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import gui.kontroler.GUIKontroler;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class GlavniProzor extends JFrame {
 
 	private JPanel contentPane;
@@ -27,9 +32,6 @@ public class GlavniProzor extends JFrame {
 	private JScrollPane scrollPane_1;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,10 +44,7 @@ public class GlavniProzor extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public GlavniProzor() {
 		setTitle("Parlament Members");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,6 +71,11 @@ public class GlavniProzor extends JFrame {
 	private JButton getBtnGETMembers() {
 		if (btnGETMembers == null) {
 			btnGETMembers = new JButton("GET members");
+			btnGETMembers.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+						GUIKontroler.vratiPoslanikeJSON();
+				}
+			});
 			btnGETMembers.setPreferredSize(new Dimension(113, 23));
 		}
 		return btnGETMembers;
@@ -79,6 +83,11 @@ public class GlavniProzor extends JFrame {
 	private JButton getBtnFillTable() {
 		if (btnFillTable == null) {
 			btnFillTable = new JButton("Fill table");
+			btnFillTable.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIKontroler.popuni();
+				}
+			});
 			btnFillTable.setPreferredSize(new Dimension(113, 23));
 		}
 		return btnFillTable;
@@ -105,7 +114,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return scrollPane;
 	}
-	private JTextArea getTextArea() {
+	public JTextArea getTextArea() {
 		if (textArea == null) {
 			textArea = new JTextArea();
 			textArea.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -119,7 +128,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return scrollPane_1;
 	}
-	private JTable getTable() {
+	public JTable getTable() {
 		if (table == null) {
 			table = new JTable();
 			table.setModel(new DefaultTableModel(

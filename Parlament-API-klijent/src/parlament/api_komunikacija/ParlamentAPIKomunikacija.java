@@ -71,4 +71,8 @@ public class ParlamentAPIKomunikacija {
 		in.close();
 		return tekst;
 	}
+	
+	public static JsonArray vratiPoslanikeUJsonFormatu() throws Exception {
+		return new GsonBuilder().setPrettyPrinting().create().fromJson(sendGet(membersURL), JsonArray.class);
+	}
 }
