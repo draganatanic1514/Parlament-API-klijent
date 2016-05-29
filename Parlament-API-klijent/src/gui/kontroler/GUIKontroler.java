@@ -107,5 +107,25 @@ public class GUIKontroler {
 			JOptionPane.showMessageDialog(glavniProzor, "Doslo je do greske", "Greska", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public static void update() {
+		PoslanikTableModel t = (PoslanikTableModel) glavniProzor.getTable().getModel();
+		
+		List<Poslanik> poslanici = t.getPoslanici();
+		
+		JsonArray poslaniciJson = ParlamentAPIKomunikacija.prebaciUJsonNiz(poslanici);
+		
+		try {
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("data/updatedMembers.json")));
+			
+			out.println(new GsonBuilder().setPrettyPrinting().create().toJson(poslaniciJson));
+			
+			out.close();
+			
+			ispis("Izmenjeni podaci su sacuvani.");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(glavniProzor, "Doslo je do greske.","Greska",JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 }

@@ -95,6 +95,11 @@ public class GlavniProzor extends JFrame {
 	private JButton getBtnUpdateMembers() {
 		if (btnUpdateMembers == null) {
 			btnUpdateMembers = new JButton("Update members");
+			btnUpdateMembers.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.update();
+				}
+			});
 		}
 		return btnUpdateMembers;
 	}
