@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import gui.kontroler.GUIKontroler;
+import gui.poslanik_table_model.PoslanikTableModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -135,14 +136,7 @@ public class GlavniProzor extends JFrame {
 	}
 	public JTable getTable() {
 		if (table == null) {
-			table = new JTable();
-			table.setModel(new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"ID", "Name", "Last name", "Birth date"
-				}
-			));
+			table = new JTable(new PoslanikTableModel());
 			table.setFillsViewportHeight(true);
 		}
 		return table;
